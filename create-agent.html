@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkBuddy — New Agent</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-wrapper">
+  <div class="window">
+
+    <!-- ── Title Bar ── -->
+    <div class="titlebar">
+      <div class="traffic-lights">
+        <div class="tl-btn tl-close"><span class="tl-symbol">✕</span></div>
+        <div class="tl-btn tl-min"><span class="tl-symbol">−</span></div>
+        <div class="tl-btn tl-max"><span class="tl-symbol">⤢</span></div>
+      </div>
+      <span class="titlebar-title">WorkBuddy — New Agent</span>
+    </div>
+
+    <!-- ── App Body ── -->
+    <div class="app-layout">
+
+      <!-- ── Sidebar ── -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-search-wrap">
+            <span class="sidebar-search-icon">⌕</span>
+            <input class="sidebar-search" type="text" placeholder="Search agents…">
+          </div>
+          <a href="create-agent.html" class="btn btn--primary btn--sm">+ New</a>
+        </div>
+
+        <div class="sidebar-section-label">My Agents</div>
+
+        <nav class="agent-list">
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">RR</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">RepoRanger</div>
+              <div class="agent-row-snippet">Summarizing 5 PRs…</div>
+            </div>
+            <div class="status-dot status-dot--active"></div>
+          </a>
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">DB</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">DocBot</div>
+              <div class="agent-row-snippet">Waiting for next task</div>
+            </div>
+            <div class="status-dot status-dot--idle"></div>
+          </a>
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">BH</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">BugHunter</div>
+              <div class="agent-row-snippet">Reproducing issue #204</div>
+            </div>
+            <div class="status-dot status-dot--active"></div>
+          </a>
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">DD</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">DeployDroid</div>
+              <div class="agent-row-snippet">Stopped</div>
+            </div>
+            <div class="status-dot status-dot--stopped"></div>
+          </a>
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">SS</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">SecureScout</div>
+              <div class="agent-row-snippet">Auditing lodash deps…</div>
+            </div>
+            <div class="status-dot status-dot--active"></div>
+          </a>
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">DW</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">DataWrangler</div>
+              <div class="agent-row-snippet">Error: timeout on fetch</div>
+            </div>
+            <div class="status-dot status-dot--error"></div>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-footer-user">
+            <div class="sidebar-footer-avatar">V</div>
+            <span>Vincent</span>
+          </div>
+          <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">☽</button>
+        </div>
+      </aside>
+
+      <!-- ── Content Area (dimmed behind modal) ── -->
+      <main class="content-area" style="position:relative;">
+
+        <!-- Background content (dimmed) -->
+        <div class="content-area--dimmed" style="display:flex;flex-direction:column;height:100%;">
+          <div class="toolbar">
+            <span class="toolbar-title">All Agents</span>
+            <span class="toolbar-subtitle">&nbsp;— 6 total</span>
+            <div class="toolbar-spacer"></div>
+            <button class="btn btn--secondary btn--sm">↕ Sort</button>
+            <button class="btn btn--secondary btn--sm">⊟ Filter</button>
+            <button class="btn btn--primary btn--sm">+ New Agent</button>
+          </div>
+          <div class="stats-strip">
+            <div class="stat-item stat-item--active">
+              <span class="stat-value">3</span>
+              <span class="stat-label">Active now</span>
+            </div>
+            <div class="stat-item stat-item--idle">
+              <span class="stat-value">1</span>
+              <span class="stat-label">Idle</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">47</span>
+              <span class="stat-label">Tasks today</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">312</span>
+              <span class="stat-label">Tasks this week</span>
+            </div>
+          </div>
+          <div class="content-scroll">
+            <div class="agent-grid">
+              <div class="card">
+                <div class="card-header">
+                  <div class="agent-avatar">RR</div>
+                  <div class="card-title-group"><div class="card-name">RepoRanger</div><div class="model-badge">claude-opus-4-5</div></div>
+                  <div class="status-dot status-dot--active"></div>
+                </div>
+                <p class="card-description">Monitors PRs, runs tests, summarizes diffs, and posts review comments.</p>
+                <div class="card-footer"><span class="tag tag--active">● Active</span><div style="flex:1"></div><button class="btn btn--secondary btn--sm">Open →</button></div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <div class="agent-avatar" style="background:rgba(255,159,10,0.12);color:#9B6900;">DB</div>
+                  <div class="card-title-group"><div class="card-name">DocBot</div><div class="model-badge">claude-haiku-4-5</div></div>
+                  <div class="status-dot status-dot--idle"></div>
+                </div>
+                <p class="card-description">Generates and updates API documentation, writes changelogs.</p>
+                <div class="card-footer"><span class="tag tag--idle">● Idle</span><div style="flex:1"></div><button class="btn btn--secondary btn--sm">Open →</button></div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <div class="agent-avatar" style="background:rgba(255,59,48,0.10);color:#C0302A;">BH</div>
+                  <div class="card-title-group"><div class="card-name">BugHunter</div><div class="model-badge">claude-sonnet-4-5</div></div>
+                  <div class="status-dot status-dot--active"></div>
+                </div>
+                <p class="card-description">Scans open issues, reproduces bugs in a sandboxed environment.</p>
+                <div class="card-footer"><span class="tag tag--active">● Active</span><div style="flex:1"></div><button class="btn btn--secondary btn--sm">Open →</button></div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <div class="agent-avatar" style="background:rgba(142,142,147,0.12);color:#636366;">DD</div>
+                  <div class="card-title-group"><div class="card-name">DeployDroid</div><div class="model-badge">claude-sonnet-4-5</div></div>
+                  <div class="status-dot status-dot--stopped"></div>
+                </div>
+                <p class="card-description">Manages CI/CD pipelines and drafts release notes.</p>
+                <div class="card-footer"><span class="tag tag--stopped">● Stopped</span><div style="flex:1"></div><button class="btn btn--secondary btn--sm">Open →</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Modal Overlay ── -->
+        <div class="modal-overlay">
+          <div class="modal-sheet" role="dialog" aria-modal="true" aria-label="Create New Agent">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h2 class="modal-title">New Agent</h2>
+              <a href="agent-list.html" class="btn btn--ghost btn--icon" title="Close" style="font-size:16px;">✕</a>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+              <form id="agentForm" onsubmit="return false;">
+
+                <!-- Name -->
+                <div class="form-field">
+                  <label class="form-label" for="agentName">Agent Name</label>
+                  <input class="input" id="agentName" type="text" placeholder="e.g. RepoRanger" autocomplete="off">
+                </div>
+
+                <!-- Description -->
+                <div class="form-field">
+                  <label class="form-label" for="agentDesc">Description</label>
+                  <input class="input" id="agentDesc" type="text" placeholder="What does this agent do?">
+                </div>
+
+                <!-- Model -->
+                <div class="form-field">
+                  <label class="form-label" for="agentModel">Model</label>
+                  <div class="select-wrap">
+                    <select class="select-input" id="agentModel">
+                      <option value="claude-opus-4-5">claude-opus-4-5 — Most capable</option>
+                      <option value="claude-sonnet-4-5" selected>claude-sonnet-4-5 — Balanced (recommended)</option>
+                      <option value="claude-haiku-4-5">claude-haiku-4-5 — Fastest &amp; cheapest</option>
+                    </select>
+                  </div>
+                  <span class="form-hint">Opus for complex reasoning; Haiku for high-frequency simple tasks.</span>
+                </div>
+
+                <!-- System Prompt -->
+                <div class="form-field">
+                  <label class="form-label" for="agentPrompt">System Prompt</label>
+                  <textarea
+                    class="textarea"
+                    id="agentPrompt"
+                    rows="5"
+                    placeholder="You are a helpful coding agent that specializes in…&#10;&#10;Guidelines:&#10;- Always ask for clarification before destructive operations&#10;- Prefer targeted edits over full rewrites"
+                  ></textarea>
+                </div>
+
+                <!-- Tools & Permissions -->
+                <div class="form-field">
+                  <label class="form-label">Tools &amp; Permissions</label>
+                  <span class="form-hint" style="margin-bottom:8px;display:block;">Select which capabilities this agent can use.</span>
+                  <div class="checkbox-group">
+                    <label class="checkbox-item">
+                      <input type="checkbox" checked> Bash / Terminal
+                    </label>
+                    <label class="checkbox-item">
+                      <input type="checkbox" checked> File Read
+                    </label>
+                    <label class="checkbox-item">
+                      <input type="checkbox"> File Write
+                    </label>
+                    <label class="checkbox-item">
+                      <input type="checkbox" checked> GitHub API
+                    </label>
+                    <label class="checkbox-item">
+                      <input type="checkbox"> Web Fetch
+                    </label>
+                    <label class="checkbox-item">
+                      <input type="checkbox"> Web Search
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Max Concurrent Tasks -->
+                <div class="form-field">
+                  <label class="form-label" for="agentConcurrency">Max Concurrent Tasks</label>
+                  <input
+                    class="input"
+                    id="agentConcurrency"
+                    type="number"
+                    value="3"
+                    min="1"
+                    max="20"
+                    style="width:100px;"
+                  >
+                  <span class="form-hint">How many tasks this agent can run in parallel.</span>
+                </div>
+
+                <!-- Auto-start -->
+                <div class="form-field">
+                  <label class="form-label">Trigger</label>
+                  <div class="select-wrap">
+                    <select class="select-input">
+                      <option selected>Manual — start tasks explicitly</option>
+                      <option>On schedule — run on a cron</option>
+                      <option>On event — GitHub webhooks, etc.</option>
+                    </select>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+              <a href="agent-list.html" class="btn btn--secondary">Cancel</a>
+              <a href="agent-detail.html" class="btn btn--primary">Create Agent →</a>
+            </div>
+
+          </div><!-- /.modal-sheet -->
+        </div><!-- /.modal-overlay -->
+
+      </main>
+
+    </div><!-- /.app-layout -->
+  </div><!-- /.window -->
+</div><!-- /.app-wrapper -->
+
+<script>
+  // Theme toggle
+  const toggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (prefersDark) { html.setAttribute('data-theme', 'dark'); toggle.textContent = '☀'; }
+  toggle.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    toggle.textContent = isDark ? '☽' : '☀';
+  });
+
+  // Live avatar preview from agent name
+  const nameInput = document.getElementById('agentName');
+  nameInput.addEventListener('input', () => {
+    // future: update a preview avatar with initials
+  });
+</script>
+</body>
+</html>

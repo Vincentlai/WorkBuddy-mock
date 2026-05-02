@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkBuddy — RepoRanger</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-wrapper">
+  <div class="window">
+
+    <!-- ── Title Bar ── -->
+    <div class="titlebar">
+      <div class="traffic-lights">
+        <div class="tl-btn tl-close"><span class="tl-symbol">✕</span></div>
+        <div class="tl-btn tl-min"><span class="tl-symbol">−</span></div>
+        <div class="tl-btn tl-max"><span class="tl-symbol">⤢</span></div>
+      </div>
+      <span class="titlebar-title">WorkBuddy — RepoRanger</span>
+    </div>
+
+    <!-- ── App Body ── -->
+    <div class="app-layout">
+
+      <!-- ── Sidebar ── -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-search-wrap">
+            <span class="sidebar-search-icon">⌕</span>
+            <input class="sidebar-search" type="text" placeholder="Search agents…">
+          </div>
+          <a href="create-agent.html" class="btn btn--primary btn--sm">+ New</a>
+        </div>
+
+        <div class="sidebar-section-label">My Agents</div>
+
+        <nav class="agent-list">
+          <a href="agent-detail.html" class="agent-row agent-row--selected">
+            <div class="agent-row-avatar">RR</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">RepoRanger</div>
+              <div class="agent-row-snippet">Summarizing 5 PRs…</div>
+            </div>
+            <div class="status-dot status-dot--active"></div>
+          </a>
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">DB</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">DocBot</div>
+              <div class="agent-row-snippet">Waiting for next task</div>
+            </div>
+            <div class="status-dot status-dot--idle"></div>
+          </a>
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">BH</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">BugHunter</div>
+              <div class="agent-row-snippet">Reproducing issue #204</div>
+            </div>
+            <div class="status-dot status-dot--active"></div>
+          </a>
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">DD</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">DeployDroid</div>
+              <div class="agent-row-snippet">Stopped</div>
+            </div>
+            <div class="status-dot status-dot--stopped"></div>
+          </a>
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">SS</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">SecureScout</div>
+              <div class="agent-row-snippet">Auditing lodash deps…</div>
+            </div>
+            <div class="status-dot status-dot--active"></div>
+          </a>
+          <a href="agent-detail.html" class="agent-row">
+            <div class="agent-row-avatar">DW</div>
+            <div class="agent-row-info">
+              <div class="agent-row-name">DataWrangler</div>
+              <div class="agent-row-snippet">Error: timeout on fetch</div>
+            </div>
+            <div class="status-dot status-dot--error"></div>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-footer-user">
+            <div class="sidebar-footer-avatar">V</div>
+            <span>Vincent</span>
+          </div>
+          <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">☽</button>
+        </div>
+      </aside>
+
+      <!-- ── Chat / Activity Area ── -->
+      <main class="content-area">
+
+        <!-- Agent Toolbar -->
+        <div class="toolbar">
+          <div class="agent-avatar agent-avatar--sm">RR</div>
+          <span class="toolbar-title">RepoRanger</span>
+          <div class="status-dot status-dot--active" style="margin-left:4px;"></div>
+          <span class="toolbar-status-text">Active — summarizing PRs</span>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn--ghost btn--sm">⏸ Pause</button>
+          <button class="btn btn--ghost btn--sm">⏹ Stop</button>
+          <div style="width:1px;height:20px;background:var(--sep);margin:0 4px;"></div>
+          <a href="create-agent.html" class="btn btn--secondary btn--sm">Configure →</a>
+        </div>
+
+        <!-- Chat Feed -->
+        <div class="chat-feed" id="chatFeed">
+
+          <!-- Message 1: User -->
+          <div class="chat-message chat-message--user">
+            <div class="message-header" style="justify-content:flex-end;">
+              <span class="message-time">2:14 PM</span>
+              <span class="message-sender">You</span>
+            </div>
+            <div class="message-bubble">
+              Review the last 5 PRs in workbuddy/core and give me a summary of what changed.
+            </div>
+          </div>
+
+          <!-- Message 2: Agent -->
+          <div class="chat-message chat-message--agent">
+            <div class="message-header">
+              <div class="agent-avatar agent-avatar--sm">RR</div>
+              <span class="message-sender">RepoRanger</span>
+              <span class="message-time">2:14 PM</span>
+            </div>
+            <div class="message-content">
+              <div class="terminal-block"><span class="terminal-prompt">$</span> <span class="terminal-cmd">gh pr list --repo workbuddy/core --limit 5 --json number,title,state,author,mergedAt</span>
+<span class="terminal-output">[
+  {"number":142,"title":"Fix sidebar scroll jitter on resize","state":"OPEN","author":{"login":"vla"}},
+  {"number":141,"title":"Add dark mode token overrides","state":"MERGED","mergedAt":"2026-05-01T18:32:00Z"},
+  {"number":140,"title":"Refactor agent-row selection logic","state":"MERGED","mergedAt":"2026-05-01T14:10:00Z"},
+  {"number":139,"title":"Bump @anthropic-ai/sdk to 0.41.0","state":"MERGED","mergedAt":"2026-04-30T09:55:00Z"},
+  {"number":138,"title":"Fix chat input bar overflow on long messages","state":"MERGED","mergedAt":"2026-04-29T22:14:00Z"}
+]</span></div>
+              <div class="message-bubble">
+                Found 5 recent PRs. Here's the summary:<br><br>
+                <strong>#142</strong> (open) — Fixes a jitter issue when the sidebar is resized; likely a CSS <code>overflow</code> fix.<br>
+                <strong>#141</strong> (merged) — Adds dark mode CSS custom property overrides; shipped yesterday evening.<br>
+                <strong>#140</strong> (merged) — Refactors the agent row selection to use a single source of truth instead of per-row state.<br>
+                <strong>#139</strong> (merged) — Bumps the Anthropic SDK. Check the changelog for any breaking changes.<br>
+                <strong>#138</strong> (merged) — Fixes chat input overflow when messages are very long.
+              </div>
+            </div>
+          </div>
+
+          <!-- Message 3: User -->
+          <div class="chat-message chat-message--user">
+            <div class="message-header" style="justify-content:flex-end;">
+              <span class="message-time">2:16 PM</span>
+              <span class="message-sender">You</span>
+            </div>
+            <div class="message-bubble">
+              Does PR #139 have any breaking changes in the SDK bump? Check the release notes.
+            </div>
+          </div>
+
+          <!-- Message 4: Agent -->
+          <div class="chat-message chat-message--agent">
+            <div class="message-header">
+              <div class="agent-avatar agent-avatar--sm">RR</div>
+              <span class="message-sender">RepoRanger</span>
+              <span class="message-time">2:16 PM</span>
+            </div>
+            <div class="message-content">
+              <div class="terminal-block"><span class="terminal-prompt">$</span> <span class="terminal-cmd">gh release view v0.41.0 --repo anthropics/anthropic-sdk-python</span>
+<span class="terminal-output">Title: v0.41.0
+Published: 2026-04-28
+
+## What's Changed
+- **BREAKING**: `client.messages.create()` now returns a typed `Message` object instead of a dict.
+  Update any code that does `response["content"]` → use `response.content` instead.
+- Add `thinking` block support for extended reasoning models.
+- Deprecate `max_tokens_to_sample` (use `max_tokens`).</span>
+<span class="terminal-success">✓ Done</span></div>
+              <div class="message-bubble">
+                Yes — there is one breaking change: the response from <code>messages.create()</code> is now a typed object, not a dict. Any code using <code>response["content"]</code> needs to be updated to <code>response.content</code>. I'd recommend searching your codebase for that pattern before merging.
+              </div>
+            </div>
+          </div>
+
+          <!-- Message 5: User -->
+          <div class="chat-message chat-message--user">
+            <div class="message-header" style="justify-content:flex-end;">
+              <span class="message-time">2:18 PM</span>
+              <span class="message-sender">You</span>
+            </div>
+            <div class="message-bubble">
+              Great. Now post a review comment on PR #142 saying the jitter fix looks good but we need a test.
+            </div>
+          </div>
+
+          <!-- Message 6: Agent — in progress -->
+          <div class="chat-message chat-message--agent">
+            <div class="message-header">
+              <div class="agent-avatar agent-avatar--sm">RR</div>
+              <span class="message-sender">RepoRanger</span>
+              <span class="message-time">2:18 PM</span>
+            </div>
+            <div class="message-content">
+              <div class="terminal-block"><span class="terminal-prompt">$</span> <span class="terminal-cmd">gh pr review 142 --repo workbuddy/core --comment \</span>
+<span class="terminal-cmd">  --body "Looks good — the overflow fix is clean. Before merging, can you add a test that resizes the sidebar programmatically and asserts the scroll position stays stable?"</span>
+<span class="terminal-success">✓ Review comment posted on PR #142</span></div>
+            </div>
+          </div>
+
+          <!-- Typing indicator -->
+          <div class="chat-message chat-message--agent">
+            <div class="message-header">
+              <div class="agent-avatar agent-avatar--sm">RR</div>
+              <span class="message-sender">RepoRanger</span>
+            </div>
+            <div class="typing-indicator">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+
+        </div><!-- /.chat-feed -->
+
+        <!-- Input Bar -->
+        <div class="chat-input-bar">
+          <textarea
+            class="chat-input"
+            id="chatInput"
+            placeholder="Send a message or command to RepoRanger…"
+            rows="1"
+          ></textarea>
+          <button class="btn btn--primary">Send ↑</button>
+        </div>
+
+      </main>
+
+    </div><!-- /.app-layout -->
+  </div><!-- /.window -->
+</div><!-- /.app-wrapper -->
+
+<script>
+  // Theme toggle
+  const toggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (prefersDark) { html.setAttribute('data-theme', 'dark'); toggle.textContent = '☀'; }
+  toggle.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    toggle.textContent = isDark ? '☽' : '☀';
+  });
+
+  // Auto-resize textarea
+  const chatInput = document.getElementById('chatInput');
+  chatInput.addEventListener('input', () => {
+    chatInput.style.height = 'auto';
+    chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
+  });
+
+  // Scroll chat feed to bottom on load
+  const feed = document.getElementById('chatFeed');
+  feed.scrollTop = feed.scrollHeight;
+</script>
+</body>
+</html>
